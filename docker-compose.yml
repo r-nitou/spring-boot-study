@@ -1,0 +1,27 @@
+services:
+ #データベースの設定
+ db:
+   image: mysql:8.0
+   container_name: mysql-db
+   restart: always
+   environment:
+     MYSQL_DATABASE: myappdb
+     MYSQL_ROOT_PASSWORD: password
+     MYSQL_USER: user
+     MYSQL_PASSWORD: password
+   ports:
+     - "3306:3306"
+
+#Spring Bootアプリ設定
+ app:
+   build: .
+   container_name: spring-app
+   ports:
+     - "8080:8080"
+   depends_on:
+     - db #DBが先に立ち上がるように設定
+   environment:
+     #アプリからDBに接続するための情報を教えてあげる
+     SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/myappdb?allowPublicKeyRetrieval=true&useSSL=false
+     SPRING_DATASOURCE_USERNAME: user
+     SPRING_DATASOURCE_PASSWORD: password

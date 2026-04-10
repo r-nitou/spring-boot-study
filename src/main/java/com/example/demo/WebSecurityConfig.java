@@ -18,6 +18,7 @@ public class WebSecurityConfig {
 	@Bean			//認証のルールを決める設定
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		http
+		.csrf((csrf)->csrf.disable())
 		.authorizeHttpRequests((requests)->requests
 				.anyRequest().authenticated()					//すべてのリクエストに認証が必要
 				)
