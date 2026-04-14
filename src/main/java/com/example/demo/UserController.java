@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,7 @@ public class UserController {
 	
 	//ユーザー一覧を取得する
 	@GetMapping
-	public List<User> getAllUsers(){
+	public Iterable<User> getAllUsers(){
 		return userRepository.findAll();
 	}
 	
